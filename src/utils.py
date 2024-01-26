@@ -38,7 +38,8 @@ def get_plantilla():
                            "BERBERECHO GALLEGO - grande", 
                            "BERBERECHO GALLEGO - extra", 
                            "ESCUPIÑA - ALMEJÓN BOLO -", 
-                           "MEJILLÓN", "NAVAJAS GALLEGAS", 
+                           "MEJILLÓN", 
+                           "NAVAJAS GALLEGAS", 
                            "BOGAVANTE AZUL GALLEGO - vivo, pequeño", 
                            "BOGAVANTE AZUL GALLEGO - cocido, pequeño", 
                            "BOGAVANTE AZUL GALLEGO - vivo, mediano", 
@@ -96,14 +97,14 @@ def get_plantilla():
                      "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", 
                      "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", 
                      "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", 
-                     "-", "-", "-", "-", "-", "-", "-"],
+                     "-", "-", "-", "-", "-", "-", "-", "-"],
     'Competidor 2': ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-", 
                      "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", 
                      "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", 
                      "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", 
                      "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", 
                      "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", 
-                     "-", "-", "-", "-", "-", "-", "-"],
+                     "-", "-", "-", "-", "-", "-", "-", "-"],
     }
     df = to_excel(pd.DataFrame(data=d))
     return df
