@@ -12,6 +12,7 @@ def to_excel(df):
     return output
 
 def get_plantilla():
+    # Add the standard units to the plantilla
     d = {
     'SKU': ["ALB-20", "ALB-30", "ALB-40", "ALF-20", "ALF-30", "ALF-40", "ALJ-20", "ALJ-30", "ALJ-40", "ALJ-50", 
             "BER-10", "BER-20", "BER-30", "BER-40", "ESC-00", "MEJ-00", "NAV-00", "BOG-11", "BOG-12", "BOG-21", 
