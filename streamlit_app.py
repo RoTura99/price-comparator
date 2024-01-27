@@ -20,7 +20,7 @@ with st.sidebar:
     competencia_raw = st.file_uploader("Precios Competencia", type="xlsx")
     if competencia_raw is not None:
         competencia_excel = pd.read_excel(competencia_raw)
-        competidores = clean_list(competencia_excel.columns)
+        competidores = clean_list(competencia_excel.columns.tolist())
     else:
         competidores = []
     st.download_button("Plantilla propia", plantilla_propia,  "plantilla_propia.xlsx", help = "Descarga la plantilla para subir tus precios")
