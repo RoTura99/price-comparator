@@ -30,3 +30,4 @@ st.title("Price Comparator")
 main_price = 1
 average_price = 1
 median_price = 1
+st.dataframe(competencia_raw)
