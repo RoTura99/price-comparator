@@ -34,6 +34,7 @@ st.title("Price Comparator")
 main_price = 1
 average_price = 1
 median_price = 1
+st.write(competencia_excel.columns)
 if competencia_raw is None or propios_raw is None:
     st.write("Sube los archivos para poder comparar")
 else:
