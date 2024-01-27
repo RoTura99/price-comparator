@@ -105,6 +105,6 @@ def color_table(x):
 
         out = np.select([m1, m2], [c1, c2], default=c3)
         out_df = pd.DataFrame(out, index=x.index, columns=x.columns)
-        out_df.insert(loc=0, column='Nombre de Producto', value=nombres)
-        out_df.insert(loc=0, column='SKU', value=skus)
+        out_df.insert(loc=0, column='Nombre de Producto', value=[''] * len(nombres))
+        out_df.insert(loc=0, column='SKU',  value=[''] * len(skus))
         return out_df
