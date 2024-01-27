@@ -34,7 +34,7 @@ def get_plantilla(propia=False):
                             "NÉCORA GALLEGA DE O GROVE - pequeño, cocido", "NÉCORA GALLEGA DE O GROVE - mediano, vivo", "NÉCORA GALLEGA DE O GROVE - mediano, cocido", "NÉCORA GALLEGA DE O GROVE - grande, vivo", 
                             "NÉCORA GALLEGA DE O GROVE - grande, cocido", "OSTRA RIZADA GALLEGA", "PATA DE PULPO COCIDO-500 GR", "PERCEBE GALLEGO - pequeño", "PERCEBE GALLEGO - mediano", "PERCEBE GALLEGO - grande", 
                             "ALBARIÑO DE LAS RÍAS BAIXAS", "VIEIRA GALLEGA - mediano", "VIEIRA GALLEGA - grande", "VOLANDEIRA GALLEGA FRESCA" , "ZAMBURIÑA"],
-        'Precio Propios': ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-", 
+        'Precio Propio': ["-", "-", "-", "-", "-", "-", "-", "-", "-", "-", 
                         "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", 
                         "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", 
                         "-", "-", "-", "-", "-", "-", "-", "-", "-", "-", 
