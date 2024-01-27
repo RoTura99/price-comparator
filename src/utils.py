@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from io import BytesIO
 import streamlit as st
 
@@ -85,4 +86,22 @@ def get_plantilla(propia=False):
 def clean_list(l):
     l.remove("SKU")
     l.remove("Nombre de Producto")
+
     return l
+
+def diference_condition(value):
+
+    return
+
+def color_table(x):
+        c1 = 'background-color: red'
+        c2 = 'background-color: green'
+        c3 = '' 
+        m1 = x.lt(x['Precio Propio']*0.9, axis=0)
+        m2 = x.gt(x['Precio Propio']*1.1, axis=0)
+        #if necessary set first 2 columns to False
+        m1.iloc[:, :2] = False
+        m2.iloc[:, :2] = False
+
+        out = np.select([m1, m2], [c1, c2], default=c3)
+        return pd.DataFrame(out, index=x.index, columns=x.columns)
