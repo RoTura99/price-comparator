@@ -16,13 +16,13 @@ plantilla_propia = get_plantilla(True)
 
 with st.sidebar:
     st.download_button("Plantilla competencia", plantilla_competidores,  "plantilla_competidores.xlsx", help = "Descarga la plantilla para subir los precios de la competencia")
-    competencia_raw = st.file_uploader("Precios Competencia", type="csv")
+    competencia_raw = st.file_uploader("Precios Competencia", type="xlsx")
     try:
         competidores = clean_list(competencia_raw.columns)
     except:
         competidores = []
     st.download_button("Plantilla propia", plantilla_propia,  "plantilla_propia.xlsx", help = "Descarga la plantilla para subir tus precios")
-    propios_raw = st.file_uploader("Precios Propios", type="csv")
+    propios_raw = st.file_uploader("Precios Propios", type="xlsx")
     main_competidor = st.multiselect("Selecciona el competidor principal", competidores)
 
 st.title("Price Comparator")
