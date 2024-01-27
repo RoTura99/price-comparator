@@ -94,14 +94,17 @@ def diference_condition(value):
     return
 
 def color_table(x):
+        skus = x['SKU']
+        nombres = x['Nombre de Producto']
+        x = x.drop(['SKU', 'Nombre de Producto'], axis=1)
         c1 = 'background-color: red'
         c2 = 'background-color: green'
         c3 = '' 
         m1 = x.lt(x['Precio Propio']*0.9, axis=0)
         m2 = x.gt(x['Precio Propio']*1.1, axis=0)
-        #if necessary set first 2 columns to False
-        m1.iloc[:, :2] = False
-        m2.iloc[:, :2] = False
 
         out = np.select([m1, m2], [c1, c2], default=c3)
-        return pd.DataFrame(out, index=x.index, columns=x.columns)
+        out_df = pd.DataFrame(out, index=x.index, columns=x.columns)
+        out_df.insert(loc=0, column='Nombre de Producto', value=nombres)
+        out_df.insert(loc=0, column='SKU', value=skus)
+        return out_df

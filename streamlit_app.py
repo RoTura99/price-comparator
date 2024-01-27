@@ -41,7 +41,6 @@ else:
         precios['Precio Principal'] = precios[main_competidor]
     precios['Precio Promedio'] = precios[competidores].mean(axis=1)
     precios['Precio Mediano'] = precios[competidores].median(axis=1)
-    precios['Precio Propio'] = precios['Precio Propio'].astype(float)
     precios = precios[['SKU', 'Nombre de Producto', 'Precio Propio', 'Precio Principal', 'Precio Promedio', 'Precio Mediano']]
 
 
