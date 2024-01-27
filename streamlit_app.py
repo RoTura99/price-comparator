@@ -42,11 +42,7 @@ else:
     precios['Precio Promedio'] = precios[competidores].mean(axis=1)
     precios['Precio Mediano'] = precios[competidores].median(axis=1)
     precios = precios[['SKU', 'Nombre de Producto', 'Precio Propio', 'Precio Principal', 'Precio Promedio', 'Precio Mediano']]
-
-
-
-    precios.style.apply(color_table, axis=None)
-    st.dataframe(precios.style.apply(color_table, axis=None))
     
     st.data_editor(precios.style.apply(color_table, axis=None), disabled = ("Precio Principal", "Precio Promedio", "Precio Mediano"))
+    
     st.download_button("Descarga los precios", to_excel(precios),  "precios_final.xlsx", help = "Descarga la hoja de precios final")
