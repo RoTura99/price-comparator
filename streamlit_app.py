@@ -17,9 +17,9 @@ plantilla_propia = get_plantilla(True)
 with st.sidebar:
     st.download_button("Plantilla competencia", plantilla_competidores,  "plantilla_competidores.xlsx", help = "Descarga la plantilla para subir los precios de la competencia")
     competencia_raw = st.file_uploader("Precios Competencia", type="xlsx")
-    try:
+    if competencia_raw is not None:
         competidores = clean_list(competencia_raw.columns)
-    except:
+    else:
         competidores = []
     st.download_button("Plantilla propia", plantilla_propia,  "plantilla_propia.xlsx", help = "Descarga la plantilla para subir tus precios")
     propios_raw = st.file_uploader("Precios Propios", type="xlsx")
