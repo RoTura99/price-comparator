@@ -17,7 +17,8 @@ plantilla_propia = get_plantilla(True)
 with st.sidebar:
     st.download_button("Plantilla competencia", plantilla_competidores,  "plantilla_competidores.xlsx", help = "Descarga la plantilla para subir los precios de la competencia")
     competencia_raw = st.file_uploader("Precios Competencia", type="xlsx")
-    # if competencia_raw is not None:
+    if competencia_raw is not None:
+        competencia_excel = pd.read_excel(competencia_raw)
     #     competidores = clean_list(competencia_raw.columns)
     # else:
     #     competidores = []
@@ -30,4 +31,4 @@ st.title("Price Comparator")
 main_price = 1
 average_price = 1
 median_price = 1
-st.dataframe(competencia_raw)
+st.dataframe(competencia_excel)
