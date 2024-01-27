@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import streamlit as st
 from pyxlsb import open_workbook as open_xlsb
-from src.utils import get_plantilla, clean_list
+from src.utils import get_plantilla, clean_list, to_excel
 
 st.set_page_config(
     page_title="App Comparadora de Precios",
@@ -41,5 +41,6 @@ else:
         precios['Precio Principal'] = precios[main_competidor]
     precios['Precio Promedio'] = precios[competidores].mean(axis=1)
     precios['Precio Mediano'] = precios[competidores].median(axis=1)
+    precios.drop(columns=[competidores])
     st.data_editor(precios)
-    st.download_button("Descarga los precios", precios,  "precios_final.xlsx", help = "Descarga la hoja de precios final")
+    st.download_button("Descarga los precios", to_excel(precios),  "precios_final.xlsx", help = "Descarga la hoja de precios final")
