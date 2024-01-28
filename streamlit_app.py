@@ -43,7 +43,7 @@ else:
         st.session_state.precios["Precio Mediano"] = st.session_state.precios[competidores].median(axis=1)
         
     st.session_state.precios = st.data_editor(st.session_state.precios.style.apply(color_table, axis=None), 
-                                              column_order = ["SKU", "Nombre de Producto", "Precio Propio", "Precio Principal", "Precio Promedio", "Precio Mediano"], 
+                                              column_order = ["SKU", "Nombre de Producto", "Precio Propio", "Precio Principal", "Precio Promedio", "Precio Mediano"] + competidores, 
                                               disabled = ["Precio Principal", "Precio Promedio", "Precio Mediano"] + competidores)
 
     st.download_button("Descarga los precios", to_excel(st.session_state.precios),  "precios_final.xlsx", help = "Descarga la hoja de precios final")
