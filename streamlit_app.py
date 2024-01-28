@@ -27,7 +27,7 @@ with st.sidebar:
     propios_raw = st.file_uploader("Precios Propios", type="xlsx")
     if propios_raw is not None:
         propios_df = pd.read_excel(propios_raw)
-    main_competidor = st.multiselect("Selecciona el competidor principal", competidores)
+    main_competidor = st.selectbox("Selecciona el competidor principal", competidores)
 
 st.title("Price Comparator")
 #make one round of prices to generate ideas of the app, make the download button work and compare.
@@ -42,7 +42,7 @@ else:
     precios['Precio Promedio'] = precios[competidores].mean(axis=1)
     precios['Precio Mediano'] = precios[competidores].median(axis=1)
     precios = precios[['SKU', 'Nombre de Producto', 'Precio Propio', 'Precio Principal', 'Precio Promedio', 'Precio Mediano']]
-    display_precios = precios.style.apply(color_table, axis=None)
-    precios = st.data_editor(display_precios, disabled = ("Precio Principal", "Precio Promedio", "Precio Mediano"))
+
+    precios = st.data_editor(precios, disabled = ("Precio Principal", "Precio Promedio", "Precio Mediano"))
 
     st.download_button("Descarga los precios", to_excel(precios),  "precios_final.xlsx", help = "Descarga la hoja de precios final")
