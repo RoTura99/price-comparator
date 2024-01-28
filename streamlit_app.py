@@ -35,12 +35,13 @@ if competencia_raw is None or propios_raw is None:
 else:
     if "precios" not in st.session_state:
         st.session_state.precios = pd.merge(propios_df, competencia_df, how = "left", on=["SKU", "Nombre de Producto"])
-        if main_competidor == []:
-            st.session_state.precios["Precio Principal"] = 0
-        else:
-            st.session_state.precios["Precio Principal"] = st.session_state.precios[main_competidor]
-        st.session_state.precios["Precio Promedio"] = st.session_state.precios[competidores].mean(axis=1)
-        st.session_state.precios["Precio Mediano"] = st.session_state.precios[competidores].median(axis=1)
+        
+    if main_competidor == []:
+        st.session_state.precios["Precio Principal"] = 0
+    else:
+        st.session_state.precios["Precio Principal"] = st.session_state.precios[main_competidor]
+    st.session_state.precios["Precio Promedio"] = st.session_state.precios[competidores].mean(axis=1)
+    st.session_state.precios["Precio Mediano"] = st.session_state.precios[competidores].median(axis=1)
         
     st.session_state.precios = st.data_editor(st.session_state.precios.style.apply(color_table, axis=None), 
                                               column_order = ["SKU", "Nombre de Producto", "Precio Propio", "Precio Principal", "Precio Promedio", "Precio Mediano"] + competidores, 
