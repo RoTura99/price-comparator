@@ -10,9 +10,6 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
-# Session State
-if 'precios' not in st.session_state:
-    st.session_state['precios'] = pd.DataFrame()
 
 # Sidebar
 with st.sidebar:
@@ -37,15 +34,15 @@ if competencia_raw is None or propios_raw is None:
     st.write("Sube los archivos para poder comparar")
 else:
     if 'precios' not in st.session_state:
-        st.session_state['precios'] = pd.merge(propios_df, competencia_df, how = 'left', on=["SKU", "Nombre de Producto"])
+        st.session_state.precios = pd.merge(propios_df, competencia_df, how = 'left', on=["SKU", "Nombre de Producto"])
     if main_competidor == []:
-        st.session_state['precios']['Precio Principal'] = 0
+        st.session_state.precios['Precio Principal'] = 0
     else:
-        st.session_state['precios']['Precio Principal'] = st.session_state['precios'][main_competidor]
-    st.session_state['precios']['Precio Promedio'] = st.session_state['precios'][competidores].mean(axis=1)
-    st.session_state['precios']['Precio Mediano'] = st.session_state['precios'][competidores].median(axis=1)
-    st.session_state['precios'] = st.session_state['precios'][['SKU', 'Nombre de Producto', 'Precio Propio', 'Precio Principal', 'Precio Promedio', 'Precio Mediano']]
+        st.session_state.precios['Precio Principal'] = st.session_state.precios[main_competidor]
+    st.session_state.precios['Precio Promedio'] = st.session_state.precios[competidores].mean(axis=1)
+    st.session_state.precios['Precio Mediano'] = st.session_state.precios[competidores].median(axis=1)
+    st.session_state.precios = st.session_state.precios[['SKU', 'Nombre de Producto', 'Precio Propio', 'Precio Principal', 'Precio Promedio', 'Precio Mediano']]
 
-    st.session_state['precios'] = st.data_editor(st.session_state['precios'].style.apply(color_table, axis=None), disabled = ("Precio Principal", "Precio Promedio", "Precio Mediano"))
+    st.session_state.precios = st.data_editor(st.session_state.precios.style.apply(color_table, axis=None), disabled = ("Precio Principal", "Precio Promedio", "Precio Mediano"))
 
-    st.download_button("Descarga los precios", to_excel(st.session_state['precios']),  "precios_final.xlsx", help = "Descarga la hoja de precios final")
+    st.download_button("Descarga los precios", to_excel(st.session_state.precios),  "precios_final.xlsx", help = "Descarga la hoja de precios final")
