@@ -2,7 +2,7 @@ import altair as alt
 import numpy as np
 import pandas as pd
 import streamlit as st
-from src.utils import get_plantilla, clean_list, to_excel, color_table
+from src.utils import get_plantilla, clean_list, to_excel, color_table, clean_output
 
 st.set_page_config(
     page_title="App Comparadora de Precios",
@@ -48,4 +48,4 @@ else:
                                               column_order = ["SKU", "Nombre de Producto", "Precio Propio", "Precio Principal", "Precio Promedio", "Precio Mediano"] + competidores, 
                                               disabled = ["Precio Principal", "Precio Promedio", "Precio Mediano"] + competidores)
 
-    st.download_button("Descarga los precios", to_excel(st.session_state.precios),  "precios_final.xlsx", help = "Descarga la hoja de precios final")
+    st.download_button("Descarga los precios", to_excel(clean_output(st.session_state.precios, competidores)),  "precios_final.xlsx", help = "Descarga la hoja de precios final")

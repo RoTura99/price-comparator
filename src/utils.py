@@ -86,12 +86,7 @@ def get_plantilla(propia=False):
 def clean_list(l):
     l.remove("SKU")
     l.remove("Nombre de Producto")
-
     return l
-
-def diference_condition(value):
-
-    return
 
 def color_table(x):
         skus = x['SKU']
@@ -108,3 +103,7 @@ def color_table(x):
         out_df.insert(loc=0, column='Nombre de Producto', value=[''] * len(nombres))
         out_df.insert(loc=0, column='SKU',  value=[''] * len(skus))
         return out_df
+
+def clean_output(df, competidores):
+    df = df.drop(['Precio Principal', 'Precio Promedio', 'Precio Mediano'] + competidores, axis=1)
+    return df
