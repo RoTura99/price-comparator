@@ -10,11 +10,14 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+# Session State
+if 'precios' not in st.session_state:
+    st.session_state['precios'] = pd.DataFrame()
 
-plantilla_competidores = get_plantilla()
-plantilla_propia = get_plantilla(True)
-
+# Sidebar
 with st.sidebar:
+    plantilla_competidores = get_plantilla()
+    plantilla_propia = get_plantilla(True)
     st.download_button("Plantilla competencia", plantilla_competidores,  "plantilla_competidores.xlsx", help = "Descarga la plantilla para subir los precios de la competencia")
     competencia_raw = st.file_uploader("Precios Competencia", type="xlsx")
     if competencia_raw is not None:
@@ -28,20 +31,21 @@ with st.sidebar:
         propios_df = pd.read_excel(propios_raw)
     main_competidor = st.selectbox("Selecciona el competidor principal", competidores)
 
+# Main App
 st.title("Price Comparator")
-#make one round of prices to generate ideas of the app, make the download button work and compare.
 if competencia_raw is None or propios_raw is None:
     st.write("Sube los archivos para poder comparar")
 else:
-    precios = pd.merge(propios_df, competencia_df, how = 'left', on=["SKU", "Nombre de Producto"])
+    if 'precios' not in st.session_state:
+        st.session_state['precios'] = pd.merge(propios_df, competencia_df, how = 'left', on=["SKU", "Nombre de Producto"])
     if main_competidor == []:
-        precios['Precio Principal'] = 0
+        st.session_state['precios']['Precio Principal'] = 0
     else:
-        precios['Precio Principal'] = precios[main_competidor]
-    precios['Precio Promedio'] = precios[competidores].mean(axis=1)
-    precios['Precio Mediano'] = precios[competidores].median(axis=1)
-    precios = precios[['SKU', 'Nombre de Producto', 'Precio Propio', 'Precio Principal', 'Precio Promedio', 'Precio Mediano']]
+        st.session_state['precios']['Precio Principal'] = st.session_state['precios'][main_competidor]
+    st.session_state['precios']['Precio Promedio'] = st.session_state['precios'][competidores].mean(axis=1)
+    st.session_state['precios']['Precio Mediano'] = st.session_state['precios'][competidores].median(axis=1)
+    st.session_state['precios'] = st.session_state['precios'][['SKU', 'Nombre de Producto', 'Precio Propio', 'Precio Principal', 'Precio Promedio', 'Precio Mediano']]
 
-    precios = st.data_editor(precios.style.apply(color_table, axis=None), disabled = ("Precio Principal", "Precio Promedio", "Precio Mediano"))
+    st.session_state['precios'] = st.data_editor(st.session_state['precios'].style.apply(color_table, axis=None), disabled = ("Precio Principal", "Precio Promedio", "Precio Mediano"))
 
-    st.download_button("Descarga los precios", to_excel(precios),  "precios_final.xlsx", help = "Descarga la hoja de precios final")
+    st.download_button("Descarga los precios", to_excel(st.session_state['precios']),  "precios_final.xlsx", help = "Descarga la hoja de precios final")
