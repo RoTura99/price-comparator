@@ -2,7 +2,6 @@ import altair as alt
 import numpy as np
 import pandas as pd
 import streamlit as st
-from pyxlsb import open_workbook as open_xlsb
 from src.utils import get_plantilla, clean_list, to_excel, color_table
 
 st.set_page_config(
