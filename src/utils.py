@@ -97,8 +97,8 @@ def color_table(x):
         skus = x['SKU']
         nombres = x['Nombre de Producto']
         x = x.drop(['SKU', 'Nombre de Producto'], axis=1)
-        c1 = 'background-color: #FF6962'
-        c2 = 'background-color: #77DD76'
+        c1 = 'background-color: #BB3E00'
+        c2 = 'background-color: #5F8D37'
         c3 = '' 
         m1 = x.lt(x['Precio Propio']*0.9, axis=0)
         m2 = x.gt(x['Precio Propio']*1.1, axis=0)
